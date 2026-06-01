@@ -20,8 +20,16 @@ const ACCENTS = {
 /* ===================================================================== */
 function App(){
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const initialLang = (()=>{ try{ const p=new URLSearchParams(location.search).get('lang'); if(p==='en'||p==='zh') return p; }catch(e){} return 'zh'; })();
+  const initialLang = (()=>{ try{
+    if(window.__LANG__==='en'||window.__LANG__==='zh') return window.__LANG__;
+    const path = location.pathname.toLowerCase();
+    if(/(^|\/)en(\/|$)/.test(path)) return 'en';
+    if(/(^|\/)zh(\/|$)/.test(path)) return 'zh';
+    const p=new URLSearchParams(location.search).get('lang'); if(p==='en'||p==='zh') return p;
+  }catch(e){} return 'zh'; })();
   const [lang, setLang] = useState(initialLang);
+  /* keep the URL in sync so the visible link is always shareable in the current language */
+  const changeLang = (l)=>{ setLang(l); try{ history.replaceState(null,'', '/'+l+'/'); }catch(e){} };
   const [faq, setFaq] = useState(0);
   const [contact, setContact] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
@@ -47,7 +55,7 @@ function App(){
 
   return (
     <>
-      <Nav C={C} lang={lang} setLang={setLang} onContact={()=>setContact(true)} scrollTo={scrollTo} navOpen={navOpen} setNavOpen={setNavOpen}/>
+      <Nav C={C} lang={lang} setLang={changeLang} onContact={()=>setContact(true)} scrollTo={scrollTo} navOpen={navOpen} setNavOpen={setNavOpen}/>
       <Hero C={C} D={D} onContact={()=>setContact(true)} scrollTo={scrollTo}/>
       <Surroundings C={C}/>
       <VibeLifestyle C={C}/>
