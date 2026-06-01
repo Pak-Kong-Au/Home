@@ -24,7 +24,6 @@ function App(){
   const [lang, setLang] = useState(initialLang);
   const [faq, setFaq] = useState(0);
   const [contact, setContact] = useState(false);
-  const [sticky, setSticky] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const [light, setLight] = useState(null);
   const C = window.SITE.t(lang);
@@ -43,13 +42,6 @@ function App(){
     else { r.style.removeProperty('--radius'); r.style.removeProperty('--radius-lg'); }
   },[t.theme,t.accent,t.corners,lang]);
 
-  /* sticky cta after hero */
-  useEffect(()=>{
-    const onScroll = ()=> setSticky(window.scrollY > 680);
-    window.addEventListener('scroll', onScroll, {passive:true});
-    return ()=> window.removeEventListener('scroll', onScroll);
-  },[]);
-
   const photo = (k)=> D.photos.find(p=>p.k===k)?.src;
   const scrollTo = (id)=>{ setNavOpen(false); document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); };
 
@@ -67,7 +59,6 @@ function App(){
       <Faq C={C} faq={faq} setFaq={setFaq}/>
       <Footer C={C} onContact={()=>setContact(true)}/>
 
-      <StickyCta C={C} show={sticky && !contact} onContact={()=>setContact(true)}/>
       <ContactModal C={C} open={contact} onClose={()=>setContact(false)}/>
       <Lightbox src={light} onClose={()=>setLight(null)}/>
 
@@ -101,15 +92,18 @@ function Nav({C,lang,setLang,onContact,scrollTo,navOpen,setNavOpen}){
             <button className={lang==='zh'?'on':''} onClick={()=>setLang('zh')}>中</button>
             <button className={lang==='en'?'on':''} onClick={()=>setLang('en')}>EN</button>
           </div>
-          <button className="btn btn-primary" style={{padding:'10px 18px'}} onClick={onContact}>{C.nav.cta}</button>
-          <button className="nav-toggle" onClick={()=>setNavOpen(!navOpen)} aria-label="menu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <button className="btn btn-primary nav-cta" onClick={onContact}>{C.nav.cta}</button>
+          <button className={'nav-toggle'+(navOpen?' on':'')} onClick={()=>setNavOpen(!navOpen)} aria-label="menu" aria-expanded={navOpen}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              {navOpen ? <path d="M6 6l12 12M18 6L6 18"/> : <path d="M4 7h16M4 12h16M4 17h16"/>}
+            </svg>
           </button>
         </div>
       </div>
       {navOpen && (
-        <div style={{borderTop:'1px solid var(--line)',padding:'10px var(--pad) 18px',display:'grid',gap:'2px'}}>
-          {links.map(([id,label])=> <a key={id} onClick={()=>scrollTo(id)} style={{padding:'12px 4px',fontSize:'16px',borderBottom:'1px solid var(--line)'}}>{label}</a>)}
+        <div className="nav-menu">
+          {links.map(([id,label])=> <a key={id} onClick={()=>scrollTo(id)}>{label}</a>)}
+          <button className="btn btn-primary" onClick={()=>{setNavOpen(false); onContact();}}>{C.nav.cta}</button>
         </div>
       )}
     </nav>
@@ -440,37 +434,22 @@ function Footer({C,onContact}){
   return (
     <footer className="foot">
       <div className="wrap">
-        <div className="foot-grid">
+        <div className="foot-top">
           <div>
-            <div className="brand" style={{marginBottom:'14px'}}>
+            <div className="brand">
               <span className="mark">2B</span>
-              <span><b>Pak Kong Au</b></span>
+              <span><b>Pak Kong Au</b><small>{C.foot.made}</small></span>
             </div>
-            <small>{C.foot.tag}</small>
+            <p className="foot-tag">{C.foot.tag}</p>
           </div>
-          <div>
-            <small style={{display:'block',marginBottom:'10px'}}>{C.foot.made}</small>
-            <button className="btn btn-dark" onClick={onContact}>{C.sticky.cta}</button>
-          </div>
-          <div style={{display:'flex',alignItems:'flex-end'}}>
-            <small>{C.foot.rights}</small>
-          </div>
+          <button className="btn btn-light" onClick={onContact}>{C.nav.cta}</button>
+        </div>
+        <div className="foot-bottom">
+          <small>{C.foot.rights}</small>
+          <small>© {new Date().getFullYear()} Pak Kong Au</small>
         </div>
       </div>
     </footer>
-  );
-}
-
-/* ---- STICKY CTA ------------------------------------------------------- */
-function StickyCta({C,show,onContact}){
-  return (
-    <div className={'sticky-cta'+(show?' show':'')}>
-      <div className="bar">
-        <div className="meta"><b>{C.sticky.price}</b><span>{C.sticky.meta}</span></div>
-        <span className="grow"></span>
-        <button className="btn btn-primary" onClick={onContact}>{C.sticky.cta}</button>
-      </div>
-    </div>
   );
 }
 
