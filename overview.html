@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pak Kong Au 2B — Site Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Noto Sans TC",system-ui,sans-serif;background:#e9e9e6;color:#23271f;
+    -webkit-font-smoothing:antialiased;padding:0 0 90px;}
+  a{color:inherit;}
+  .head{padding:38px clamp(20px,5vw,64px) 30px;border-bottom:1px solid #d7d7d2;display:flex;
+    justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;background:#f3f3f0;position:sticky;top:0;z-index:10;}
+  .head h1{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.04;}
+  .head .k{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#5b6b54;margin-bottom:10px;}
+  .head p{color:#5b6b54;font-size:14px;max-width:54ch;margin-top:8px;line-height:1.6;}
+  .open{display:inline-flex;align-items:center;gap:9px;background:#33513f;color:#fff;border-radius:6px;
+    padding:13px 22px;font-size:14.5px;font-weight:600;text-decoration:none;white-space:nowrap;}
+  .open:hover{background:#26412f;}
+  .wrap{padding:clamp(28px,5vw,56px) clamp(20px,5vw,64px);}
+  .band{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:#5b6b54;display:flex;align-items:center;gap:16px;margin:6px 0 26px;}
+  .band::after{content:"";flex:1;height:1px;background:#d3d3ce;}
+  .row{display:flex;gap:clamp(20px,3vw,40px);flex-wrap:wrap;margin-bottom:56px;}
+  .col{flex:1 1 460px;min-width:300px;}
+  .label{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .label b{font-family:"Cormorant Garamond",serif;font-size:21px;font-weight:700;}
+  .label .tag{font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:#5b6b54;border:1px solid #cfcfc9;border-radius:999px;padding:3px 9px;}
+
+  .browser{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 24px 60px -28px rgba(20,28,20,.4);border:1px solid #d7d7d2;}
+  .bbar{height:40px;background:#f0f0ec;border-bottom:1px solid #e2e2dd;display:flex;align-items:center;padding:0 14px;gap:7px;}
+  .bbar i{width:11px;height:11px;border-radius:50%;background:#d3d3cd;display:block;}
+  .bbar .url{margin-left:14px;background:#fff;border:1px solid #e2e2dd;border-radius:6px;height:24px;flex:1;max-width:340px;
+    display:flex;align-items:center;padding:0 12px;font-family:"Space Mono",monospace;font-size:11px;color:#7a8a73;}
+  .shot-d{display:block;width:100%;height:auto;}
+
+  .phones{display:flex;gap:clamp(22px,4vw,52px);flex-wrap:wrap;align-items:flex-start;}
+  .phone-col{display:flex;flex-direction:column;align-items:center;gap:14px;}
+  .device{width:286px;height:582px;border-radius:44px;border:11px solid #1c241d;background:#1c241d;overflow:hidden;
+    box-shadow:0 30px 70px -26px rgba(20,28,20,.5);position:relative;}
+  .device .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:118px;height:24px;background:#1c241d;
+    border-radius:0 0 16px 16px;z-index:2;}
+  .device img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+  .note{font-family:"Space Mono",monospace;font-size:11px;color:#7a8a73;text-align:center;}
+  .aside{flex:1;min-width:280px;max-width:42ch;align-self:center;color:#4a5644;font-size:14.5px;line-height:1.7;}
+  .aside h3{font-family:"Cormorant Garamond",serif;font-size:23px;font-weight:700;color:#23271f;margin-bottom:10px;}
+  .aside a{color:#33513f;font-weight:600;text-decoration:underline;}
+</style>
+</head>
+<body>
+  <div class="head">
+    <div>
+      <div class="k">Direct · 免佣金</div>
+      <h1>Pak Kong Au &middot; 2B</h1>
+      <p>A bilingual (繁體中文 / English), fully responsive single-page site with a custom social-share card. Below is a preview of each version — open the live site to interact, switch language and explore the Tweaks panel.</p>
+    </div>
+    <a class="open" href="index.html" target="_blank">Open live site →</a>
+  </div>
+
+  <div class="wrap">
+    <div class="band">Desktop · 桌面版</div>
+    <div class="row">
+      <div class="col">
+        <div class="label"><b>繁體中文</b><span class="tag">Default · 預設</span></div>
+        <div class="browser">
+          <div class="bbar"><i></i><i></i><i></i><span class="url">pakkongau-2b.hk</span></div>
+          <a href="index.html?lang=zh" target="_blank"><img class="shot-d" src="assets/shots/d-zh.png" alt="Traditional Chinese desktop"/></a>
+        </div>
+      </div>
+      <div class="col">
+        <div class="label"><b>English</b><span class="tag">Toggle · 切換</span></div>
+        <div class="browser">
+          <div class="bbar"><i></i><i></i><i></i><span class="url">pakkongau-2b.hk/en</span></div>
+          <a href="index.html?lang=en" target="_blank"><img class="shot-d" src="assets/shots/d-en.png" alt="English desktop"/></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="band">Mobile · 手機版</div>
+    <div class="phones">
+      <div class="phone-col">
+        <div class="device"><div class="notch"></div><img src="assets/shots/mob-zh.png" alt="TC mobile"/></div>
+        <div class="note">繁體中文 · 手機</div>
+      </div>
+      <div class="phone-col">
+        <div class="device"><div class="notch"></div><img src="assets/shots/mob-en.png" alt="EN mobile"/></div>
+        <div class="note">English · Mobile</div>
+      </div>
+      <div class="aside">
+        <h3>One link, every platform.</h3>
+        <p>The same URL adapts from phone to desktop and carries a custom Open-Graph card when shared on WhatsApp, WeChat, Facebook, LinkedIn or Telegram — leading with the lifestyle hook and the key numbers.</p>
+        <p style="margin-top:14px;"><a href="og-card.html" target="_blank">View the share card →</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
